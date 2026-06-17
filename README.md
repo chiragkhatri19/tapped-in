@@ -1,5 +1,7 @@
 # Tappd In
 
+[![CI](https://github.com/chiragkhatri19/tapped-in/actions/workflows/ci.yml/badge.svg)](https://github.com/chiragkhatri19/tapped-in/actions/workflows/ci.yml)
+
 > The fitness app that shows its work.
 
 **Tappd In** is an evidence-first fitness OS for a global audience. It replaces four apps — nutrition tracker, workout planner, AI coach, and science library — with one product where **every recommendation cites a peer-reviewed study (with DOIs)**.
