@@ -1,0 +1,11 @@
+node_modules/
+.expo/
+dist/
+dist-test/
+build/
+*.log
+build.log
+assets/
+pi-session-*.html
+package-lock.json
+android/

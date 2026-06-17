@@ -1,0 +1,31 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "entry": [
+    "src/index.{ts,tsx,js,jsx}",
+    "src/main.{ts,tsx,js,jsx}"
+  ],
+  "duplicates": {
+    "minOccurrences": 3
+  },
+  "rules": {},
+  "ignoreExports": [
+    { "file": "src/types.ts",            "exports": ["*"] },
+    { "file": "types/index.ts",          "exports": ["*"] },
+    { "file": "constants/muscles.ts",    "exports": ["*"] },
+    { "file": "lib/workout-analytics.ts","exports": ["*"] },
+    { "file": "shared/types/api.ts",     "exports": ["*"] },
+    { "file": "stores/workout-store.ts",   "exports": ["ActiveWorkoutState"] },
+    { "file": "components/workout/ui.tsx", "exports": ["ExerciseRow"] },
+    { "file": "lib/json-repair.ts",        "exports": ["parseModelJSONStrict"] }
+  ],
+  "ignoreDependencies": [
+    "expo-build-properties",
+    "expo-status-bar",
+    "expo-system-ui",
+    "react-native-web",
+    "fallow",
+    "@expo/cli",
+    "@expo/ngrok",
+    "babel-plugin-react-compiler"
+  ]
+}

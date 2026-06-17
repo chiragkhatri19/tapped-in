@@ -1,0 +1,23 @@
+---
+description: Tracker + log meal feature scope
+globs:
+  - app/(tabs)/index.tsx
+  - app/log-meal.tsx
+  - components/DailyMacroSummary.tsx
+  - components/MealCard.tsx
+  - components/OilCheckModal.tsx
+  - components/IngredientSearchRow.tsx
+  - stores/tracker-store.ts
+  - data/tracker-types.ts
+  - lib/gemini-scan.ts
+  - lib/oil-calories.ts
+---
+
+# Feature: tracker / log_meal
+
+Read `docs/features/tracker.md` and `docs/features/log-meal.md`.
+
+- Canonical state: `stores/tracker-store.ts` + `STORAGE_KEYS.TRACKER_LOGS`
+- Do not reintroduce `tapped_in_tracker_logs_v2` for new writes
+- Gemini: oil in notes only, never in ingredient list
+- Parked tabs (recipes/workout/trainer) are out of scope unless user changes FEATURE

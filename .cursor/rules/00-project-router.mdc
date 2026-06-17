@@ -1,0 +1,37 @@
+---
+description: Tapped In — always-on router (read before broad repo search)
+globs:
+alwaysApply: true
+---
+
+# Tapped In — AI router
+
+Production code is the **repo root only**. Scaffold was removed 2026-05-17 — do not recreate `tapped-in-scaffold/`.
+
+Before implementing:
+
+1. Read `INTEGRATION_STATUS.md` for migration status
+2. Read `docs/feature-registry.yaml` for the feature ID (paths, storage, collisions)
+3. Read `docs/features/<feature>.md` when it exists
+4. For storage/Zustand/SQLite work, read `docs/TYPESCRIPT_STACK_MIGRATION.md`
+
+## Priorities (user-defined)
+
+1. Scaffold → root migration (inventory in INTEGRATION_STATUS)
+2. TS/storage stack (Zustand/MMKV → SQLite later)
+3. Refine tracker/plan — not recipes/workout/trainer until stack stable
+
+## Task prompt shape
+
+```
+FEATURE: tracker
+READ FIRST: docs/feature-registry.yaml, INTEGRATION_STATUS.md
+DO NOT: tapped-in-scaffold, src/calorieEngine.ts (unless cited)
+```
+
+## Non-negotiables
+
+- Oil check mandatory for cooked meals
+- No bro-science protein above engine ceiling
+- `useColors()` for theme; `OIL_ORANGE = '#F97316'` only for oil UI
+- Zustand: selector pattern, never subscribe to full store

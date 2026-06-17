@@ -1,0 +1,93 @@
+{
+  "expo": {
+    "name": "tappd in",
+    "slug": "tapped-in",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "tapped-in",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F2ECDE"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Tapped In uses the camera to scan product barcodes.",
+        "NSMicrophoneUsageDescription": "Tapped In uses the mic so you can talk to your coach.",
+        "NSSpeechRecognitionUsageDescription": "Tapped In transcribes your speech to chat with your coach."
+      }
+    },
+    "android": {
+      "package": "com.tappedin.app",
+      "allowBackup": false,
+      "permissions": [
+        "POST_NOTIFICATIONS",
+        "CAMERA",
+        "RECORD_AUDIO",
+        "android.permission.health.READ_SLEEP",
+        "android.permission.health.READ_STEPS",
+        "android.permission.health.READ_HEART_RATE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Tapped In uses the camera to scan product barcodes."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "newArchEnabled": true,
+            "minSdkVersion": 26,
+            "targetSdkVersion": 35
+          },
+          "ios": {
+            "newArchEnabled": true
+          }
+        }
+      ],
+      "react-native-health-connect",
+      "./plugins/with-health-connect-delegate",
+      "expo-audio",
+      "@react-native-google-signin/google-signin",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#2B3AFF",
+          "androidMode": "default",
+          "androidCollapsedTitle": "Tapped In"
+        }
+      ],
+      "@morrowdigital/watermelondb-expo-plugin",
+      "./plugins/fix-watermelondb-jsi",
+      ["expo-speech-recognition", {
+        "microphonePermission": "Tapped In uses the mic so you can talk to your coach.",
+        "speechRecognitionPermission": "Tapped In transcribes your speech to chat with your coach.",
+        "androidSpeechServicePackages": ["com.google.android.googlequicksearchbox"]
+      }]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": false
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": "development"
+      }
+    }
+  }
+}

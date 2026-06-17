@@ -1,0 +1,7 @@
+[build]
+dockerfilePath = "backend/Dockerfile"
+
+[deploy]
+startCommand = "node dist/index.mjs"
+healthcheckPath = "/health"
+healthcheckTimeout = 30

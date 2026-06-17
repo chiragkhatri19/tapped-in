@@ -1,0 +1,84 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+ios/
+android/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+.vercel
+
+.env
+
+# Backend build output
+backend/dist/
+backend/node_modules/
+backend/.env
+
+# NativeWind
+.expo-shared/
+
+# Agent / build artifacts
+pi-session-*.html
+build.log
+tracked_files.txt
+dist-test/
+
+# Catalog seed data (USDA FDC JSON — download manually, gitignored per plan)
+scripts/data/
+
+# Google OAuth client secret files (contain client_secret — never commit)
+client_secret_*.json
+
+# Build artifacts / binaries (never commit — exceed GitHub limits)
+*.apk
+*.aab
+_bundle*.js
+
+# Logs
+*.log
+logs/
+
+# Temp screenshots / scratch images (root-scoped, does not affect assets/)
+.tmp_*.png
+.emu-screen.png
+debug-screen.png
+
+# Tool caches
+.fallow/
+
+# Binary docs (keep source-of-truth in docs/ as markdown)
+*.docx
+
+# Local AI-assistant settings (per-machine permissions, not for the repo)
+.claude/settings.local.json
