@@ -1,0 +1,45 @@
+# CodeRabbit configuration — https://docs.coderabbit.ai/guides/configure-coderabbit
+# AI code review on every PR. Install the CodeRabbit GitHub App on this repo to activate.
+language: en-US
+early_access: false
+
+reviews:
+  # "assertive" surfaces more issues; good for guarding a foundation.
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  review_status: true
+  poem: false
+  collapse_walkthrough: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - master
+
+  # Skip generated / vendored / binary-heavy paths.
+  path_filters:
+    - "!**/package-lock.json"
+    - "!android/**"
+    - "!ios/**"
+    - "!assets/**"
+    - "!dist/**"
+    - "!**/*.docx"
+    - "!docs/dependency-map.json"
+
+  # Project-specific review guidance (mirrors CLAUDE.md critical rules).
+  path_instructions:
+    - path: "**/*.{ts,tsx}"
+      instructions: >
+        TypeScript strict — flag any use of `any` or unexplained type assertions.
+        Every nutrition/calorie/training claim must map to an EvidenceCard in
+        data/evidence.ts. Database logic belongs in lib/db/, never in UI components.
+        Protein ceiling is 1.8 g/kg unless a meta-analysis is cited.
+    - path: "stores/**"
+      instructions: >
+        Zustand stores must use selector patterns. Flag direct full-store
+        subscriptions and any secrets committed to source.
+
+chat:
+  auto_reply: true
