@@ -5,7 +5,9 @@ shippable and ensure **every change is reviewed before it lands**.
 
 ## Branching & PR flow
 
-1. **Never commit directly to `master`.** It is protected.
+1. **Never commit directly to `master`** — route every change through a PR.
+   (Hard branch protection requires GitHub Pro on a private repo; until then this
+   is enforced by convention, not by GitHub.)
 2. Create a branch off `master`:
    ```bash
    git checkout -b feat/short-description
@@ -17,11 +19,29 @@ shippable and ensure **every change is reviewed before it lands**.
    npm run typecheck
    npm run lint
    ```
-5. Open a Pull Request. Two automated reviewers run on every PR:
-   - **GitHub Actions CI** — typecheck + lint must pass (required status check).
-   - **CodeRabbit** — AI code review; address its comments or reply with rationale.
+5. Open a Pull Request. The free review stack (below) runs automatically.
 6. Merge only after CI is green and review comments are resolved. Prefer
    **Squash & merge** to keep `master` history clean.
+
+## Code review (free stack)
+
+Every change is reviewed by a stack of tools that are **free on private repos** —
+no paid plan required:
+
+| Tool | What it does | Free limit |
+|---|---|---|
+| **GitHub Actions CI** (`.github/workflows/ci.yml`) | Strict typecheck (blocking) + lint (informational) on frontend & backend | Free (2,000 min/mo) |
+| **CodeRabbit** (`.coderabbit.yaml`) | AI line-by-line review + PR summary | 200 files/hr, 4 PR reviews/hr |
+| **GitHub Copilot** code review | Second AI opinion, native to GitHub | 50 review requests/mo (Copilot Free) |
+
+One-time setup:
+- **CodeRabbit** — install the app: <https://github.com/apps/coderabbitai> → select this repo.
+- **Copilot** — enable Copilot Free on your account, then on each PR use
+  *Reviewers → Copilot* (or it auto-reviews if you add a repo rule).
+
+These are advisory until the repo is on GitHub Pro (which lets you mark CI as a
+**required** status check that blocks merge). Treat a red CI run or unresolved
+review comment as a blocker by convention.
 
 ## Reverting
 
