@@ -1,0 +1,145 @@
+# Tapped In — Feature registry (machine-readable)
+# Use: FEATURE=<id> in prompts. Read INTEGRATION_STATUS.md for migration checklist.
+
+version: 1
+updated: "2026-05-17"
+
+rules:
+  production_root: "."
+  scaffold_removed: "2026-05-17"
+
+features:
+  onboarding:
+    status: built
+    phase: 1
+    prod_paths:
+      - app/(onboarding)/**
+      - context/onboarding-context.tsx
+    storage: []
+    blocked_by: []
+
+  plan_results:
+    status: built
+    phase: 1
+    prod_paths:
+      - app/(tabs)/results.tsx
+      - src/planGenerator.ts
+      - src/calorieEngine.ts
+      - src/macroEngine.ts
+      - components/MacroBar.tsx
+      - components/StatCard.tsx
+    storage:
+      - key: tapped_in_profile
+        via: stores/profile-store.ts
+    collisions: []
+
+  evidence_science:
+    status: built
+    phase: 1
+    prod_paths:
+      - app/(tabs)/evidence.tsx
+      - data/evidence.ts
+      - components/EvidenceButton.tsx
+      - components/EvidenceModal.tsx
+
+  food_db:
+    status: planned
+    phase: 1
+    note: "food tab route not yet in app; data in data/foods.ts"
+    prod_paths:
+      - data/foods.ts
+    shared_by: [tracker, recipes, log_meal]
+
+  profile:
+    status: built
+    phase: 1
+    prod_paths:
+      - app/(tabs)/profile.tsx
+      - stores/profile-store.ts
+
+  tracker:
+    status: built
+    phase: 1
+    refinement: in_progress
+    prod_paths:
+      - app/(tabs)/index.tsx
+      - app/log-meal.tsx
+      - components/DailyMacroSummary.tsx
+      - components/MealCard.tsx
+      - components/OilCheckModal.tsx
+      - components/IngredientSearchRow.tsx
+      - components/MicroPanel.tsx
+      - data/tracker-types.ts
+      - stores/tracker-store.ts
+    storage:
+      - key: tapped_in_tracker_logs_v2
+        status: legacy
+        note: "auto-migrated on launch"
+      - key: tapped_in_tracker_logs
+        status: canonical
+        via: stores/tracker-store.ts
+    entrypoints:
+      - "Tracker tab" -> app/(tabs)/index.tsx
+      - "Log a meal" -> app/log-meal.tsx
+
+  log_meal:
+    status: built
+    phase: 1
+    refinement: in_progress
+    parent: tracker
+    prod_paths:
+      - app/log-meal.tsx
+      - lib/gemini-scan.ts
+      - lib/oil-calories.ts
+    external_apis:
+      - name: gemini-1.5-flash
+        env: EXPO_PUBLIC_GEMINI_API_KEY
+    collisions:
+      - "Gemini must NOT list oil in ingredients; OilCheckModal owns oil"
+
+  recipes:
+    status: copied_parked
+    phase: 2
+    prod_paths:
+      - app/(tabs)/recipes.tsx
+      - components/recipes/**
+    storage:
+      - tapped_in_recipes
+      - tapped_in_recipe_votes
+      - tapped_in_saved_recipes
+    shared_by: [food_db]
+    blocked_by: ["Tracker + log meal stack stable before hardening recipes"]
+
+  workout:
+    status: copied_parked
+    phase: 3
+    prod_paths:
+      - app/(tabs)/workout.tsx
+      - components/workout/**
+      - components/WorkoutPlanDisplay.tsx
+    storage:
+      - tapped_in_workout_plans
+      - tapped_in_workout_logs
+      - tapped_in_workout_plan
+      - tapped_in_active_workout
+      - tapped_in_exercise_prs
+
+  trainer:
+    status: copied_parked
+    phase: 5
+    prod_paths:
+      - app/(tabs)/trainer.tsx
+    storage:
+      - tapped_in_tap_history
+    depends_on: [tracker, workout]
+    blocked_by: ["Phase 5 per roadmap"]
+
+  sqlite_drizzle:
+    status: planned
+    phase: stack_migration
+    planned_paths:
+      - lib/db/client.ts
+      - lib/db/schema.ts
+      - lib/db/queries/tracker.ts
+    replaces: "MMKV JSON blobs for meals/ingredients/oil"
+    blocked_by: ["tracker-store stable in production"]
